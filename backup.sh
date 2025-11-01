@@ -17,6 +17,7 @@ mkdir -p "$TEMP_DIR"
 echo "📦 Backup PostgreSQL..."
 docker exec chatwoot-postgres-1 pg_dumpall -U postgres 2>/dev/null | gzip > "$TEMP_DIR/chatwoot-db.sql.gz" || echo "⚠️  PostgreSQL chatwoot falhou (continuando...)"
 docker exec postgres_for_n8n pg_dumpall -U postgres 2>/dev/null | gzip > "$TEMP_DIR/n8n-db.sql.gz" || echo "⚠️  PostgreSQL n8n falhou (continuando...)"
+docker exec tracking-api_postgres_1 pg_dumpall -U tracking_user 2>/dev/null | gzip > "$TEMP_DIR/tracking-db.sql.gz" || echo "⚠️  PostgreSQL tracking falhou (continuando...)"
 
 # 2. Backup dos bancos MySQL
 echo "📦 Backup MySQL..."

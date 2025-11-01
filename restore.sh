@@ -38,6 +38,7 @@ sleep 5
 echo "📥 Restaurando PostgreSQL..."
 gunzip < "$TEMP_DIR/chatwoot-db.sql.gz" | docker exec -i chatwoot-postgres-1 psql -U postgres
 gunzip < "$TEMP_DIR/n8n-db.sql.gz" | docker exec -i postgres_for_n8n psql -U postgres
+gunzip < "$TEMP_DIR/tracking-db.sql.gz" | docker exec -i tracking-api_postgres_1 psql -U tracking_user
 
 # Restaura bancos MySQL (com container rodando)
 echo "📥 Restaurando MySQL..."
@@ -73,6 +74,7 @@ cd /home/chatwoot && docker-compose up -d
 cd /home/n8n && docker-compose up -d
 cd /home/mautic-achadinhos && docker-compose up -d
 cd /home/gtm-achadinhos && docker-compose up -d
+cd /home/tracking-api && docker-compose up -d
 
 # Aguarda containers iniciarem
 sleep 10
